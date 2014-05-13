@@ -16,8 +16,8 @@ exports.when = function () {
   describe.apply(null, args);
 };
 
-exports.initializeScribe = function (options) {
-  return exports.driver.executeAsyncScript(setupTest, options).then(function () {
+exports.initializeScribe = function (scribeModuleID, options) {
+  return exports.driver.executeAsyncScript(setupTest, scribeModuleID, options).then(function () {
     exports.scribeNode.getInnerHTML = function () {
       return exports.driver.executeScript(function () {
         return window.scribe.getHTML();
@@ -25,8 +25,8 @@ exports.initializeScribe = function (options) {
     };
   });
 
-  function setupTest(options, done) {
-    require(['../../src/scribe'], function (Scribe) {
+  function setupTest(scribeModuleID, options, done) {
+    require([scribeModuleID], function (Scribe) {
       'use strict';
       /**
        * In Firefox, the options object appears to be frozen. I’m unable
