@@ -1,5 +1,3 @@
-/* global window */
-
 var assign = require('lodash-node/modern/objects/assign');
 var contains = require('lodash-node/modern/collections/contains');
 var Q = require('q');
