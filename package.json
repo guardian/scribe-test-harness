@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "lodash-node": "~2.4.1",
     "mocha": "~1.18.2",
