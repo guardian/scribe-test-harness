@@ -91,7 +91,7 @@ exports.browserVersion = process.env.BROWSER_VERSION;
 exports.platform = process.env.PLATFORM;
 
 exports.registerChai = function (chai) {
-  chai.Assertion.includeStack = true;
+  chai.config.includeStack = true;
 
   chai.use(function (chai, utils) {
     chai.Assertion.addMethod('html', function (regExpContents) {
