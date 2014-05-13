@@ -1,0 +1,20 @@
+{
+  "eqeqeq": true, // ===
+  "laxbreak": true, // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.
+  "node": true,
+  "predef": ["define"],
+  "quotmark": "single",
+  "undef": true, // Prohibits the use of explicitly undeclared variables
+  "unused": true,
+  // Allow standalone expressions (needed for expectations such as `expect(foo).to.be.undefined`)
+  // See: https://github.com/chaijs/chai/issues/41
+  "expr": true,
+  "predef": [
+    "after",
+    "afterEach",
+    "before",
+    "beforeEach",
+    "describe",
+    "it"
+  ]
+}

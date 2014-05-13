@@ -1,0 +1,11 @@
+{
+  "name": "scribe-test-harness",
+  "version": "0.0.1",
+  "dependencies": {
+    "lodash-node": "~2.4.1",
+    "mocha": "~1.18.2",
+    "q": "~1.0.0",
+    "request": "~2.33.0",
+    "selenium-webdriver": "~2.41.0"
+  }
+}
