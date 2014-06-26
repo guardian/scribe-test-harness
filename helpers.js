@@ -250,7 +250,10 @@ before(function () {
     });
   }
 
-  return Q.all([getDriverSessionID, exports.driver.get('http://localhost:8080/test/app/index.html')]);
+  var testServerPort = process.env.TEST_SERVER_PORT || 8080;
+  var testServerUrl = 'http://localhost:' + testServerPort + '/';
+  var testPath = 'test/app/index.html';
+  return Q.all([getDriverSessionID, exports.driver.get(testServerUrl + testPath)]);
 });
 
 after(function () {
