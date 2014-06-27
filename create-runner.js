@@ -9,8 +9,11 @@ var counts = {
 
 module.exports = function (mocha) {
   var runner = mocha.run(function () {
-    // Notify Sauce Labs on whether the suite passed or failed
     var hasPassed = counts.fail === 0;
+    if (process.env.SAUCE_USERNAME == null){
+      return process.exit(hasPassed ? 0 : 1);
+    }
+    // Notify Sauce Labs on whether the suite passed or failed
     Q.ninvoke(request, 'put', {
       json: true,
       url: 'https://saucelabs.com/rest/v1/' + process.env.SAUCE_USERNAME + '/jobs/' + global.sessionID,
