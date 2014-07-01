@@ -88,7 +88,7 @@ function insertContent(html) {
 }
 
 
-exports.wheninsertHTMLOf = function (content, fn) {
+exports.whenInsertingHTMLOf = function (content, fn) {
   exports.given('content of "' + content + '"', function () {
     beforeEach(function () {
       return insertContent(content).then(function () {
