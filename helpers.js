@@ -93,16 +93,9 @@ function insertContent(html) {
  * innerHTML
  **/
 exports.whenInsertingHTMLOf = function (content, fn) {
-  exports.given('content of "' + content + '"', function () {
+  exports.when('content of "' + content + '"', function () {
     beforeEach(function () {
-      return insertContent(content).then(function () {
-        return exports.driver.executeScript(function (content) {
-          if (content.match('|').length) {
-            var selection = new window.scribe.api.Selection();
-            selection.selectMarkers();
-          }
-        }, content);
-      }).then(function () {
+      return insertContent(content)..then(function () {
         return exports.driver.executeScript(function () {
           window.scribe.el.focus();
         });
