@@ -87,7 +87,11 @@ function insertContent(html) {
   });
 }
 
-
+/**
+ * This operates in much the same way as givenContentOf
+ * except it call insertHTML instead of directly setting
+ * innerHTML
+ **/
 exports.whenInsertingHTMLOf = function (content, fn) {
   exports.given('content of "' + content + '"', function () {
     beforeEach(function () {
