@@ -47,6 +47,16 @@ function setContent(html) {
   }, html);
 }
 
+/**
+ * Differs from setContent as it defers to insertHTML command
+ **/
+function insertContent(html) {
+    return exports.driver.executeScript(function(html) {
+        window.scribe.insertHTML(html);
+    });
+}
+
+
 exports.executeCommand = function (commandName, value) {
   return exports.driver.executeScript(function (commandName, value) {
     var command = window.scribe.getCommand(commandName);
@@ -69,6 +79,26 @@ exports.givenContentOf = function (content, fn) {
         return exports.driver.executeScript(function () {
           window.scribe.el.focus();
         });
+      });
+    });
+
+    fn();
+  });
+};
+
+
+exports.wheninsertHTMLOf = function (content, fn) {
+  beforeEach(function () {
+    return insertContent(content).then(function () {
+      return exports.driver.executeScript(function (content) {
+        if (content.match('|').length) {
+          var selection = new window.scribe.api.Selection();
+          selection.selectMarkers();
+        }
+      }, content);
+    }).then(function () {
+      return exports.driver.executeScript(function () {
+        window.scribe.el.focus();
       });
     });
 
