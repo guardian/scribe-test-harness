@@ -47,6 +47,7 @@ function setContent(html) {
   }, html);
 }
 
+
 exports.executeCommand = function (commandName, value) {
   return exports.driver.executeScript(function (commandName, value) {
     var command = window.scribe.getCommand(commandName);
@@ -75,6 +76,31 @@ exports.givenContentOf = function (content, fn) {
     fn();
   });
 };
+
+
+/**
+ * Differs from setContent as it defers to insertHTML command
+ **/
+function insertHTML(html) {
+  return exports.driver.executeScript(function(html) {
+    window.scribe.insertHTML(html);
+  }, html);
+}
+
+
+exports.whenInsertingHTMLOf = function (content, fn) {
+  exports.when('content of "' + content + '" is inserted', function () {
+    beforeEach(function() {
+      return exports.driver.executeScript(function () {
+        window.scribe.el.focus();
+      }).then(function() {
+        return insertHTML(content);
+      });
+    });
+    fn();
+  });
+};
+
 
 // DOM helper
 exports.insertCaretPositionMarker = function () {
