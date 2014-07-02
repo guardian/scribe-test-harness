@@ -93,7 +93,7 @@ exports.whenInsertingHTMLOf = function (content, fn) {
     beforeEach(function() {
       return exports.driver.executeScript(function () {
         window.scribe.el.focus();
-      }, content).then(function() {
+      }).then(function() {
         return insertHTML(content);
       });
     });
