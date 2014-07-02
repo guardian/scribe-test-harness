@@ -81,27 +81,22 @@ exports.givenContentOf = function (content, fn) {
 /**
  * Differs from setContent as it defers to insertHTML command
  **/
-function insertContent(html) {
+function insertHTML(html) {
   return exports.driver.executeScript(function(html) {
     window.scribe.insertHTML(html);
-  });
+  }, html);
 }
 
-/**
- * This operates in much the same way as givenContentOf
- * except it call insertHTML instead of directly setting
- * innerHTML
- **/
+
 exports.whenInsertingHTMLOf = function (content, fn) {
-  exports.when('content of "' + content + '"', function () {
-    beforeEach(function () {
-      return insertContent(content)..then(function () {
-        return exports.driver.executeScript(function () {
-          window.scribe.el.focus();
-        });
+  exports.when('content of "' + content + '" is inserted', function () {
+    beforeEach(function() {
+      return exports.driver.executeScript(function () {
+        window.scribe.el.focus();
+      }, content).then(function() {
+        return insertHTML(content);
       });
     });
-
     fn();
   });
 };
