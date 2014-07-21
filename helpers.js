@@ -23,6 +23,12 @@ exports.initializeScribe = function (scribeModuleID, options) {
         return window.scribe.getHTML();
       });
     };
+
+    exports.scribeNode.getContent = function () {
+      return exports.driver.executeScript(function () {
+        return window.scribe.getContent();
+      });
+    };
   });
 
   function setupTest(scribeModuleID, options, done) {
