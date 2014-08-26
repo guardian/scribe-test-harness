@@ -9,6 +9,12 @@ var counts = {
 
 module.exports = function (mocha) {
   var runner = mocha.run(function () {
+
+    if(!(process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY)) {
+      // Bail out if we haven't defined any SauceLabs credentials
+      return;
+    }
+
     // Notify Sauce Labs on whether the suite passed or failed
     var hasPassed = counts.fail === 0;
     Q.ninvoke(request, 'put', {
