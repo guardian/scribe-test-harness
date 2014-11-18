@@ -6,8 +6,6 @@
 
 CWD=`pwd`;
 DIRNAME=`dirname $0`;
-FILENAME=`basename $0`;
-FILEPATH="$DIRNAME/$FILENAME";
 
 if [ ! -e "$CWD/run-tests.sh"  ]; then
   cp "$DIRNAME/run-tests.sh"  "$CWD/run-tests.sh";
