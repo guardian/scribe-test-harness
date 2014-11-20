@@ -6,7 +6,7 @@
 
 CWD=`pwd`
 DIRNAME=`dirname $0`
-TARGET_PATH="$CWD/../../../run-tests.sh"
+TARGET_PATH="$CWD/../../run-tests.sh"
 
 if [ ! -e $TARGET_PATH  ]
 then
