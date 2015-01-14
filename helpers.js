@@ -107,6 +107,43 @@ exports.whenInsertingHTMLOf = function (content, fn) {
   });
 };
 
+exports.whenPastingHTMLOf = function (content, fn) {
+  exports.when('content of "' + content + '" is pasted', function () {
+    var pasteBuffer;
+    beforeEach(function() {
+      return exports.driver.executeScript(function (content) {
+        var selection = window.getSelection();
+
+        // Add temporary element we use to copy specified content to the clipboard
+        pasteBuffer = window.document.createElement('div');
+        pasteBuffer.setAttribute('contenteditable', true);
+        pasteBuffer.id = 'pastebuffer';
+        pasteBuffer.innerHTML = content;
+        window.scribe.el.parentNode.appendChild(pasteBuffer);
+
+        // Build selection -- in FF, range.selectNodeContents() is wrongly selecting
+        // outer node so we need to do this manually
+        selection.removeAllRanges();
+        for (var i = 0, ilen = pasteBuffer.children.length, range; i < ilen; i++) {
+          range = window.document.createRange();
+          range.selectNode(pasteBuffer.children[i]);
+          selection.addRange(range);
+        }
+      }, content).then(function() {
+        var copy = webdriver.Key.chord(webdriver.Key.COMMAND, 'c');
+        return exports.driver.findElement(webdriver.By.tagName('body')).sendKeys(copy);
+      }).then(function () {
+        var paste = webdriver.Key.chord(webdriver.Key.COMMAND, 'v');
+        return exports.scribeNode.sendKeys(paste);
+      }).then(function () {
+        return exports.driver.executeScript(function () {
+          window.document.getElementById('pastebuffer').remove();  // clean up paste buffer
+        });
+      });
+    });
+    fn();
+  });
+};
 
 // DOM helper
 exports.insertCaretPositionMarker = function () {
