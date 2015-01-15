@@ -114,10 +114,11 @@ exports.whenPastingHTMLOf = function (content, fn) {
 
         // We need to use a fake paste event because Chrome Webdriver doesn't support simulated Ctrl+V
         var mockEvent = new window.CustomEvent('paste', { bubbles: true });
-        mockEvent.clipboardData = {};
-        mockEvent.clipboardData.types = ['text/html'];
-        mockEvent.clipboardData.getData = function () {
-          return content;
+        mockEvent.clipboardData = {
+          types: ['text/html'],
+          getData: function () {
+            return content;
+          }
         };
 
         var range = window.document.createRange();
@@ -125,6 +126,7 @@ exports.whenPastingHTMLOf = function (content, fn) {
         var selection = window.document.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
+        
         window.scribe.el.dispatchEvent(mockEvent);
       }, content);
     });
