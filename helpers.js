@@ -107,6 +107,30 @@ exports.whenInsertingHTMLOf = function (content, fn) {
   });
 };
 
+exports.whenPastingHTMLOf = function (content, fn) {
+  exports.when('content of "' + content + '" is pasted', function () {
+    beforeEach(function() {
+      return exports.driver.executeScript(function (content) {
+
+        // We need to use a fake paste event because Chrome Webdriver doesn't support simulated Ctrl+V
+        var mockEvent = new window.CustomEvent('paste', { bubbles: true });
+        mockEvent.clipboardData = {};
+        mockEvent.clipboardData.types = ['text/html'];
+        mockEvent.clipboardData.getData = function () {
+          return content;
+        };
+
+        var range = window.document.createRange();
+        range.selectNodeContents(window.scribe.el);
+        var selection = window.document.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        window.scribe.el.dispatchEvent(mockEvent);
+      }, content);
+    });
+    fn();
+  });
+};
 
 // DOM helper
 exports.insertCaretPositionMarker = function () {
