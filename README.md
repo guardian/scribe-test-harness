@@ -27,4 +27,11 @@ function.
 ## Accessing WebDriver
 
 If you want access to the underlying WebDriver, you can get it with
-```helpers.driver``` but you need to get it inside a ```beforeEach``` block.
+```helpers.driver``` but you need to get it inside a ```beforeEach```
+block.
+
+## Selenium Browser Bugs
+
+Selenium has some quirks around key input and treeWalker in older
+versions of Chrome. This may cause some oddness and can be the cause
+of failing tests.
