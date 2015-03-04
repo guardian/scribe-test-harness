@@ -11,7 +11,8 @@ An example ```setup.js``` file is shown below
 
 ```
 var helpers = require('scribe-test-harness/helpers');
-var initializeScribe = helpers.initializeScribe.bind(null, '[path-to-scribe]');
+var initializeScribe = helpers.initializeScribe.bind(null,
+'[path-to-scribe]', 'scribe-options');
 
 beforeEach(function() {
   return initializeScribe();
