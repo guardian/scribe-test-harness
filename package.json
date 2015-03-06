@@ -6,7 +6,7 @@
     "mocha": "~1.18.2",
     "q": "~1.0.0",
     "request": "~2.33.0",
-    "selenium-webdriver": "~2.41.0",
+    "selenium-webdriver": "~2.45.0",
     "http-server": "^0.7.3",
     "webdriver-manager": "^1.0.1"
   },
