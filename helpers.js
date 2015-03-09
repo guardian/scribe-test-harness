@@ -4,6 +4,9 @@ var Q = require('q');
 var SeleniumServer = require('selenium-webdriver/remote').SeleniumServer;
 var webdriver = require('selenium-webdriver');
 
+var SELENIUM_VERSION = process.env.SELENIUM_VERSION || 2.41.0;
+var seleniumPath = './vendor/selenium-server-standalone-' + SELENIUM_VERSION + '.jar';
+
 exports.given = function () {
   var args = Object.create(arguments);
   args[0] = 'given ' + args[0];
@@ -126,7 +129,7 @@ exports.whenPastingHTMLOf = function (content, fn) {
         var selection = window.document.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-        
+
         window.scribe.el.dispatchEvent(mockEvent);
       }, content);
     });
@@ -255,7 +258,7 @@ if (local) {
   before(function () {
     // Note: you need to run from the root of the project
     // TODO: path.resolve
-    server = new SeleniumServer('./vendor/selenium-server-standalone-2.41.0.jar', {
+    server = new SeleniumServer(seleniumPath, {
       port: 4444
     });
 
