@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "dependencies": {
     "execsync": "0.0.6",
     "http-server": "^0.7.3",
