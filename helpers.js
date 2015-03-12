@@ -1,8 +1,33 @@
+var path = require('path');
+var fs = require('fs');
 var assign = require('lodash-node/modern/objects/assign');
 var contains = require('lodash-node/modern/collections/contains');
 var Q = require('q');
 var SeleniumServer = require('selenium-webdriver/remote').SeleniumServer;
 var webdriver = require('selenium-webdriver');
+var execSync = require('execsync');
+var mkdirp = require('mkdirp');
+
+var SELENIUM_VERSION = process.env.SELENIUM_VERSION || "2.41.0";
+var SELENIUM_MINOR_VERSION = SELENIUM_VERSION.substring(0, 4);
+var vendorPath = path.resolve(process.cwd(), 'vendor');
+//if we do not have a vendor folder create one
+if (!fs.existsSync(vendorPath)) {
+  mkdirp.sync(vendorPath);
+}
+
+//look for the selenium jar
+var seleniumPath = vendorPath + '/selenium-server-standalone-' + SELENIUM_VERSION + '.jar';
+//if selenium jar is not present download it
+if (!fs.existsSync(seleniumPath)) {
+  var command = 'wget -O vendor/selenium-server-standalone-' + SELENIUM_VERSION + '.jar '
+              + 'https://selenium-release.storage.googleapis.com/' + SELENIUM_MINOR_VERSION + '/selenium-server-standalone-' + SELENIUM_VERSION + '.jar';
+  console.log('Downloading selenium driver, this may take a while');
+  execSync(command);
+}
+
+
+
 
 exports.given = function () {
   var args = Object.create(arguments);
@@ -126,7 +151,7 @@ exports.whenPastingHTMLOf = function (content, fn) {
         var selection = window.document.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-        
+
         window.scribe.el.dispatchEvent(mockEvent);
       }, content);
     });
@@ -255,7 +280,7 @@ if (local) {
   before(function () {
     // Note: you need to run from the root of the project
     // TODO: path.resolve
-    server = new SeleniumServer('./vendor/selenium-server-standalone-2.41.0.jar', {
+    server = new SeleniumServer(seleniumPath, {
       port: 4444
     });
 
