@@ -8,7 +8,7 @@ var webdriver = require('selenium-webdriver');
 var execSync = require('execsync');
 var mkdirp = require('mkdirp');
 
-var SELENIUM_VERSION = process.env.SELENIUM_VERSION || "2.41.0";
+var SELENIUM_VERSION = process.env.SELENIUM_VERSION || "2.45.0";
 var SELENIUM_MINOR_VERSION = SELENIUM_VERSION.substring(0, 4);
 var vendorPath = path.resolve(process.cwd(), 'vendor');
 //if we do not have a vendor folder create one
