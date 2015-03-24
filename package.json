@@ -17,5 +17,8 @@
   },
   "scripts": {
     "postinstall": "./bin/postinstall.sh"
-  }
+  },
+  "contributors": [
+    {"name" : "Robert Rees"}
+  ]
 }
