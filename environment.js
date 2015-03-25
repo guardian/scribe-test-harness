@@ -10,7 +10,7 @@ export.ensureDirectory = function(directoryName) {
 };
 
 export.loadSpecifications = function(mocha, directory) {
-  glob(directory + '**/*.spec.js', function (error, files) {
+   function addSpecs(error, files) {
     if(error) {
       console.log(error);
       process.exit(1);
@@ -20,5 +20,7 @@ export.loadSpecifications = function(mocha, directory) {
       mocha.addFile(filePath);
     });
 
-  });
+  }
+
+  glob(directory + '**/*.spec.js', addSpecs);
 };
