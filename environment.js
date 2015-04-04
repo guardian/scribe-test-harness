@@ -27,7 +27,6 @@ exports.loadSpecifications= function(directory, mocha) {
     } else {
 
       files.sort(unitTestsFirst).forEach(function(filePath) {
-        console.log(filePath);
         mocha.addFile(filePath);
       });
 
