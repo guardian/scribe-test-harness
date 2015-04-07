@@ -2,25 +2,37 @@ var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var glob = require('glob');
+var q = require('q');
 
-export.ensureDirectory = function(directoryName) {
+exports.ensureDirectory = function(directoryName) {
   if (!fs.existsSync(directoryName)) {
     mkdirp.sync(directoryName);
   }
 };
 
-export.loadSpecifications = function(mocha, directory) {
-   function addSpecs(error, files) {
+
+exports.loadSpecifications= function(directory, mocha) {
+  var deferred = q.defer();
+
+  function unitTestsFirst(a, b) {
+      if(a.match('/unit/')) {
+        return -1;
+      }
+      return 1;
+  };
+
+  glob(directory, function(error, files) {
     if(error) {
-      console.log(error);
-      process.exit(1);
+      deferred.reject(error);
+    } else {
+
+      files.sort(unitTestsFirst).forEach(function(filePath) {
+        mocha.addFile(filePath);
+      });
+
+      deferred.resolve(mocha);
     }
+  });
 
-    files.forEach(function (filePath) {
-      mocha.addFile(filePath);
-    });
-
-  }
-
-  glob(directory + '**/*.spec.js', addSpecs);
+  return deferred.promise;
 };
