@@ -74,7 +74,7 @@ exports.initializeScribe = function (scribeModuleID, options) {
 
 function setContent(html) {
   return exports.driver.executeScript(function (html) {
-    window.scribe.setContent(html.replace(/\|/g, '<em class="scribe-marker"></em>'));
+    window.scribe.setContent(html.replace(/\|/g, '<em [^>]*class="scribe-marker"[^>]*></em>'));
   }, html);
 }
 
