@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Utility functions for testing the Scribe editor and its associated plugins",
   "dependencies": {
     "execsync": "0.0.6",
@@ -21,7 +21,9 @@
     "postinstall": "./bin/postinstall.sh"
   },
   "contributors": [
-    {"name" : "Robert Rees"}
+    {
+      "name": "Robert Rees"
+    }
   ],
   "repository": {
     "type": "git",
