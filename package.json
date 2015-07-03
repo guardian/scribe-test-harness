@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Utility functions for testing the Scribe editor and its associated plugins",
   "dependencies": {
     "execsync": "0.0.6",
