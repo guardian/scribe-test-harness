@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Utility functions for testing the Scribe editor and its associated plugins",
   "dependencies": {
     "execsync": "0.0.6",
@@ -10,8 +10,8 @@
     "mocha": "~1.18.2",
     "q": "~1.2.0",
     "request": "~2.33.0",
-    "selenium-webdriver": "~2.41.0",
-    "webdriver-manager": "^1.0.1",
+    "selenium-webdriver": "~2.47",
+    "webdriver-manager": "~7",
     "glob": "~5"
   },
   "peerDependencies": {

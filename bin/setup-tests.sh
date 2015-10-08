@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Download the selenium JAR
-SELENIUM_VERSION=2.46.0
-SELENIUM_MINOR_VERSION=2.46
+SELENIUM_VERSION=2.48.0
+SELENIUM_MINOR_VERSION=2.48
 
 LOCAL_SELENIUM=vendor/selenium-server-standalone-$SELENIUM_VERSION.jar
 
