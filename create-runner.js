@@ -10,18 +10,13 @@ var counts = {
 module.exports = function (mocha) {
   var runner = mocha.run(function () {
 
-    var hasPassed = counts.fail === 0;
-
-    function exitTests() {
-      process.exit(hasPassed ? 0 : 1);
-    }
-
     if(!(process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY)) {
       // Bail out if we haven't defined any SauceLabs credentials
-      exitTests();
+      return;
     }
 
     // Notify Sauce Labs on whether the suite passed or failed
+    var hasPassed = counts.fail === 0;
     Q.ninvoke(request, 'put', {
       json: true,
       url: 'https://saucelabs.com/rest/v1/' + process.env.SAUCE_USERNAME + '/jobs/' + global.sessionID,
@@ -32,7 +27,9 @@ module.exports = function (mocha) {
       body: {
         passed: hasPassed
       }
-    }).then(exitTests).done();
+    }).then(function () {
+      process.exit(hasPassed ? 0 : 1);
+    }).done();
   });
 
   runner.on('pass', function () {
