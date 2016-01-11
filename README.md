@@ -1,6 +1,6 @@
 # Scribe Test Harness
 
-Provides a number of helpers to aid in writing tests for Scribe.
+Test utilities for use with the Scribe and its plugins.
 
 ## Setting up tests
 
