@@ -4,7 +4,7 @@ Provides a number of helpers to aid in writing tests for Scribe.
 
 ## Setting up tests
 
-You can use the scribe test harness to help with testin Sciribe but it
+You can use the scribe test harness to help with testing Scribe but it
 needs to be properly initialised.
 
 An example ```setup.js``` file is shown below
