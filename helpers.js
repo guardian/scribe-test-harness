@@ -5,7 +5,7 @@ var contains = require('lodash-node/modern/collections/contains');
 var Q = require('q');
 var SeleniumServer = require('selenium-webdriver/remote').SeleniumServer;
 var webdriver = require('selenium-webdriver');
-var execSync = require('execsync');
+var execSync = require('child_process').execSync
 var mkdirp = require('mkdirp');
 
 var SELENIUM_VERSION = process.env.SELENIUM_VERSION || "2.48.0";
