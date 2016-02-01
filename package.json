@@ -1,6 +1,6 @@
 {
   "name": "scribe-test-harness",
-  "version": "0.0.25",
+  "version": "1.0.0",
   "description": "Utility functions for testing the Scribe editor and its associated plugins",
   "dependencies": {
     "http-server": "^0.7.3",
