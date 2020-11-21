@@ -9,7 +9,7 @@
     "mocha": "~1.18.2",
     "q": "~1.2.0",
     "request": "~2.33.0",
-    "selenium-webdriver": "~2.47",
+    "selenium-webdriver": "~2.53.3",
     "webdriver-manager": "~7",
     "glob": "~5"
   },
